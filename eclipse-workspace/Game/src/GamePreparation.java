@@ -47,7 +47,7 @@ public class GamePreparation extends JFrame implements KeyListener, ActionListen
 		 
 		 
 		 
-		 s
+		 
 		 //setting up the screen
 		 
 		 
