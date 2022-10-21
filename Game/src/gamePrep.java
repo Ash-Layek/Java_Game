@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 public class gamePrep extends JFrame implements KeyListener, ActionListener {
 
 	
+	
 	private character1 Character1;
 	
 	private character2 Character2;
@@ -42,15 +43,19 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character1 = new character1();
 		
-		Character1.setX(0);
+		Character1.setX(350);
 		
-		Character1.setY(150);
+		Character1.setY(380);
 		
 		Character1.setHeight(112);
 		
 		Character1.setWidth(128);
 		
 		Character1.setImage("catgif.gif");
+		
+		Character1.updateRectangleSize();
+		
+		Character1.updateRectanglePosition();
 		
 		// character 2
 		
@@ -59,15 +64,19 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2.setY(50);
 		
-		Character2.setX(100);
+		Character2.setX(0);
 		
-		Character2.setHeight(350);
+		Character2.setHeight(240);
 		
-		Character2.setWidth(600);
+		Character2.setWidth(240);
 		
-		Character2.setImage("roadRoller.gif");
+		Character2.setImage("wolf_run.gif");
 		
 		Character2.setCharacter1(Character1);
+		
+		Character2.updateRectangleSize();
+		
+		Character2.updateRectanglePosition();
 		
 		
 		
@@ -112,6 +121,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		
 		// graphic elements for character2
+		
 		
 		character2Label = new JLabel();
 		
@@ -271,6 +281,9 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	Character1.setX(x);
 	
 	Character1.setY(y);
+	
+	
+	Character1.updateRectanglePosition();
 	
 	character1Label.setLocation(Character1.getX(), Character1.getY());
 		

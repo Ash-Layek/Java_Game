@@ -16,7 +16,7 @@ public class character2 extends sprite implements Runnable {
    
 	
 	public  character2(){
-    	  super(0,0,202,350,"roadRoller.gif");
+    	  super(0,0,240,240,"wolf_run.gif");
     	  
     	  this.visible = true;
     	  
@@ -121,14 +121,16 @@ public class character2 extends sprite implements Runnable {
 		
 		this.startButton.setText("STOP");
 		
-		this.character1Label.setIcon(new ImageIcon(getClass().getResource("catgif.gif")));
+		this.character1Label.setIcon(new ImageIcon(getClass().getResource(Character1.getImage())));
 		
-		this.character2Label.setIcon(new ImageIcon(getClass().getResource("roadRoller.gif")));
+		this.character2Label.setIcon(new ImageIcon(getClass().getResource(this.getImage())));
 		
 		
 		while (this.isMoving) {
 			
 			int currentX = this.x;
+			
+			int currentY = this.y;
 			
 			
 			// move character 2 while isMoving = true;
@@ -142,9 +144,13 @@ public class character2 extends sprite implements Runnable {
 			 
 			 this.setX(currentX);
 			 
+			 this.updateRectanglePosition();
+			 
 			 displayLocation();
 			 
 			 // check collision
+			 
+			if (this.visible) this.detectCollision();
 			 
 			//	if ( this.visible ) this.detectCollision();
 				
@@ -168,6 +174,27 @@ public class character2 extends sprite implements Runnable {
 		this.startButton.setText("Start");
 		
 		
+	}
+	
+	
+	private void detectCollision() {
+		
+		
+		if (r.intersects(Character1.getRectangle())) {
+			
+			
+			
+			
+			System.out.println("BOOM");
+			
+			System.out.print(Character1.getRectangle());
+			
+			System.out.print(this.getRectangle());
+			
+			this.isMoving = false;
+			
+			
+		}
 	}
 	
 	
