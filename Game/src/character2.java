@@ -16,7 +16,7 @@ public class character2 extends sprite implements Runnable {
    
 	
 	public  character2(){
-    	  super(0,0,240,240,"wolf_run.gif");
+    	  super(0,0,186,236,"Ghost.gif");
     	  
     	  this.visible = true;
     	  
