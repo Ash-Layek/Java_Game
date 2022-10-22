@@ -16,7 +16,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private character1 Character1;
 	
-	private character2 Character2;
+	private character2[] Character2 = new character2[3];
 	
 	private backgroundImage backgroundImage;
 	
@@ -25,7 +25,9 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private Container content;
 	
-	private JLabel character1Label, character2Label, backgroundLabel;
+	private JLabel character1Label, backgroundLabel;
+	
+	private JLabel[] character2Label = new JLabel[3];
 	
 	private ImageIcon character1Image, character2Image, backgroundImg;
 	
@@ -60,24 +62,66 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		// character 2
 		
 		
-		Character2 = new character2();
+		Character2[0] = new character2();
 		
-		Character2.setY(50);
+		Character2[0].setY(50);
 		
-		Character2.setX(0);
+		Character2[0].setX(0);
 		
-		Character2.setHeight(240);
+		Character2[0].setHeight(240);
 		
-		Character2.setWidth(240);
+		Character2[0].setWidth(240);
 		
-		Character2.setImage("wolf_run.gif");
+		Character2[0].setImage("wolf_run.gif");
 		
-		Character2.setCharacter1(Character1);
+		Character2[0].setCharacter1(Character1);
 		
-		Character2.updateRectangleSize();
+		Character2[0].updateRectangleSize();
 		
-		Character2.updateRectanglePosition();
+		Character2[0].updateRectanglePosition();
 		
+		// 2 / 1
+		
+        Character2[1] = new character2();
+		
+		Character2[1].setY(50);
+		
+		Character2[1].setX(300);
+		
+		Character2[1].setHeight(240);
+		
+		Character2[1].setWidth(240);
+		
+		Character2[1].setImage("wolf_run.gif");
+		
+		Character2[1].setCharacter1(Character1);
+		
+		Character2[1].updateRectangleSize();
+		
+		Character2[1].updateRectanglePosition();
+		
+		
+		
+		// 2 / 2
+		
+		    Character2[2] = new character2();
+			
+			Character2[2].setY(50);
+			
+			Character2[2].setX(600);
+			
+			Character2[2].setHeight(240);
+			
+			Character2[2].setWidth(240);
+			
+			Character2[2].setImage("wolf_run.gif");
+			
+			Character2[2].setCharacter1(Character1);
+			
+			Character2[2].updateRectangleSize();
+			
+			Character2[2].updateRectanglePosition();
+			
 		
 		
 		//
@@ -114,7 +158,11 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		character1Label.setLocation(Character1.getX(), Character1.getY());
 		
-		Character2.setCharacter1Label(character1Label);
+		Character2[0].setCharacter1Label(character1Label);
+		
+		Character2[1].setCharacter1Label(character1Label);
+
+		Character2[2].setCharacter1Label(character1Label);
 		
 		
 		
@@ -122,18 +170,43 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		// graphic elements for character2
 		
+		character2Label[0] = new JLabel();
 		
-		character2Label = new JLabel();
 		
-		character2Image = new ImageIcon(getClass().getResource(Character2.getImage()));
+		character2Image = new ImageIcon(getClass().getResource(Character2[0].getImage()));
 		
-		character2Label.setIcon(character2Image);
+		character2Label[0].setIcon(character2Image);
 		
-		character2Label.setSize(Character2.getWidth(), Character2.getHeight());
+		character2Label[0].setSize(Character2[0].getWidth(), Character2[0].getHeight());
 		
-		character2Label.setLocation(Character2.getX(), Character2.getY());
+		character2Label[0].setLocation(Character2[0].getX(), Character2[0].getY());
 		
-		Character2.setCharacter2Label(character2Label);
+		Character2[0].setCharacter2Label(character2Label[0]);
+		
+		// ----------------------
+		
+		character2Label[1] = new JLabel();
+		
+		character2Label[1].setIcon(character2Image);
+		
+		character2Label[1].setSize(Character2[1].getWidth(), Character2[1].getHeight());
+		
+		character2Label[1].setLocation(Character2[1].getX(), Character2[1].getY());
+		
+		Character2[1].setCharacter2Label(character2Label[1]);
+		
+		// -------------
+		
+        character2Label[2] = new JLabel();
+		
+		character2Label[2].setIcon(character2Image);
+		
+		character2Label[2].setSize(Character2[1].getWidth(), Character2[1].getHeight());
+		
+		character2Label[2].setLocation(Character2[1].getX(), Character2[1].getY());
+		
+		Character2[2].setCharacter2Label(character2Label[2]);
+		
 		
 		//background label
 		
@@ -159,7 +232,13 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		startButton.setFocusable(false);
 		
-		Character2.setStartButton(startButton);
+		Character2[0].setStartButton(startButton);
+		
+		Character2[1].setStartButton(startButton);
+		
+		Character2[2].setStartButton(startButton);
+		
+		
 		
 		// add hide button
 		
@@ -186,7 +265,11 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		visibilityButton.addActionListener(this);
 		
 		add(character1Label);
-		add(character2Label);
+		add(character2Label[0]);
+		
+		add(character2Label[1]);
+		
+		add(character2Label[2]);
 		add(backgroundLabel);
 		
 		content.addKeyListener(this);
@@ -297,34 +380,59 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		if (e.getSource() == startButton) {
 			
-			if (Character2.getIsMoving()) {
+			if (Character2[0].getIsMoving()) {
 				
-				Character2.setIsMoving(false);
+				Character2[0].setIsMoving(false);
+				
+				Character2[1].setIsMoving(false);
+				
+				Character2[2].setIsMoving(false);
 				
 			} else {
 				
-				Character2.startMoving();
+				Character2[0].startMoving();
+				
+				Character2[1].startMoving();
+				
+				Character2[2].startMoving();
 			}
 			
 		} else if (e.getSource() == visibilityButton) {
 			
 			
 			
-			if (Character2.getVisible()) {
+			if (Character2[0].getVisible()) {
 				
 				
-				Character2.setVisible(false);
+				Character2[0].setVisible(false);
 				
-				character2Label.setVisible(Character2.getVisible());
+				Character2[1].setVisible(false);
+				
+				Character2[2].setVisible(false);
+				
+				character2Label[0].setVisible(Character2[0].getVisible());
+				
+				character2Label[1].setVisible(Character2[1].getVisible());
+				
+				character2Label[2].setVisible(Character2[1].getVisible());
+				
 				
 				visibilityButton.setText("show");
 				
 				
 			} else {
 				
-				Character2.setVisible(true);
+				Character2[0].setVisible(true);
 				
-				character2Label.setVisible(Character2.getVisible());
+				Character2[1].setVisible(true);
+				
+				Character2[2].setVisible(true);
+				
+				character2Label[0].setVisible(Character2[0].getVisible());
+				
+				character2Label[1].setVisible(Character2[1].getVisible());
+				
+				character2Label[2].setVisible(Character2[2].getVisible());
 				
 				visibilityButton.setText("hide");
 			}

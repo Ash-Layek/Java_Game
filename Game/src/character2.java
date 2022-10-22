@@ -30,10 +30,14 @@ public class character2 extends sprite implements Runnable {
 		this.character2Label = temp;
 	}
 	
+	
+	
 	public void setCharacter1Label(JLabel temp) {
 		
 		this.character1Label = temp;
 	}
+	
+
 	
 	public void setCharacter1(character1 temp) {
 		
@@ -110,6 +114,8 @@ public class character2 extends sprite implements Runnable {
 		System.out.println("visible: " + this.visible);
 		System.out.println("moving: " + this.isMoving);
 	}
+	
+	
 
 	@Override
 	public void run() {
@@ -159,9 +165,13 @@ public class character2 extends sprite implements Runnable {
 				this.character2Label.setLocation(this.x, this.y);
 				
 				
+				
+				
 				try {
 					
-					Thread.sleep(50);
+					Thread.sleep(100);
+					
+					// sleep;
 					
 				} catch (Exception e) {
 					
