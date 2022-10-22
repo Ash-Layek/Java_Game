@@ -68,9 +68,9 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2[0].setX(0);
 		
-		Character2[0].setHeight(236);
+		Character2[0].setHeight(80);
 		
-		Character2[0].setWidth(186);
+		Character2[0].setWidth(80);
 		
 		Character2[0].setImage("Ghost.gif");
 		
@@ -88,9 +88,9 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2[1].setX(300);
 		
-		Character2[1].setHeight(236);
+		Character2[1].setHeight(80);
 		
-		Character2[1].setWidth(186);
+		Character2[1].setWidth(80);
 		
 		Character2[1].setImage("Ghost.gif");
 		
@@ -110,9 +110,9 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			Character2[2].setX(600);
 			
-			Character2[2].setHeight(236);
+			Character2[2].setHeight(80);
 			
-			Character2[2].setWidth(186);
+			Character2[2].setWidth(80);
 			
 			Character2[2].setImage("Ghost.gif");
 			
