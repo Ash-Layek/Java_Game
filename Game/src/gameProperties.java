@@ -9,7 +9,7 @@ public class gameProperties {
 	
 	public static final int screen_height = 600;
 	
-	public static final int character_step = 10;
+	public static final int character_step = 20;
 	
 	
 	

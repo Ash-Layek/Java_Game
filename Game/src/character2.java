@@ -169,7 +169,7 @@ public class character2 extends sprite implements Runnable {
 				
 				try {
 					
-					Thread.sleep(50);
+					Thread.sleep(100);
 					
 					// sleep;
 					
