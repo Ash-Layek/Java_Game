@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,7 +18,7 @@ public class character2 extends sprite implements Runnable {
    
 	
 	public  character2(){
-    	  super(0,0,80,80,"Ghost.gif");
+    	  super(0,0,65,65,"Ghost.gif");
     	  
     	  this.visible = true;
     	  
@@ -141,7 +143,7 @@ public class character2 extends sprite implements Runnable {
 			
 			// move character 2 while isMoving = true;
 			
-			 currentX += gameProperties.character_step - 20;
+			 currentX += gameProperties.character_step - 15;
 			 
 			 if (currentX >= gameProperties.screen_width) {
 					currentX = -1 * this.width;
@@ -150,6 +152,7 @@ public class character2 extends sprite implements Runnable {
 			 
 			 this.setX(currentX);
 			 
+			
 			 this.updateRectanglePosition();
 			 
 			 displayLocation();
@@ -165,6 +168,16 @@ public class character2 extends sprite implements Runnable {
 				this.character2Label.setLocation(this.x, this.y);
 				
 				
+				Random number  = new Random();
+				
+				int low = 1;
+				
+				int high  = 100;
+				
+				
+				int result = number.nextInt(high-low) + low;
+				
+		
 				
 				
 				try {

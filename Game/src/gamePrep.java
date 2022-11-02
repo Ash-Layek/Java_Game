@@ -18,18 +18,26 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private character2[] Character2 = new character2[3];
 	
+	private character2[] Character2_secondRow = new character2[3];
+	
 	private backgroundImage backgroundImage;
+	
+	
+	
+	
+	
+
 	
 	
 	// graphic elements
 	
 	private Container content;
 	
-	private JLabel character1Label, backgroundLabel;
+	private JLabel character1Label, backgroundLabel, backgroundLabel2;
 	
-	private JLabel[] character2Label = new JLabel[3];
+	private JLabel[] character2Label = new JLabel[3], character2_secondRowLabel = new JLabel[3];
 	
-	private ImageIcon character1Image, character2Image, backgroundImg;
+	private ImageIcon character1Image, character2Image, backgroundImg, backgroundImg2;
 	
 	private JButton startButton;
 	
@@ -47,11 +55,11 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character1.setX(350);
 		
-		Character1.setY(380);
+		Character1.setY(700);
 		
-		Character1.setHeight(120);
+		Character1.setHeight(80);
 		
-		Character1.setWidth(122);
+		Character1.setWidth(80);
 		
 		Character1.setImage("girlRun.gif");
 		
@@ -64,13 +72,13 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2[0] = new character2();
 		
-		Character2[0].setY(50);
+		Character2[0].setY(600);
 		
 		Character2[0].setX(0);
 		
-		Character2[0].setHeight(80);
+		Character2[0].setHeight(65);
 		
-		Character2[0].setWidth(80);
+		Character2[0].setWidth(65);
 		
 		Character2[0].setImage("Ghost.gif");
 		
@@ -84,13 +92,13 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
         Character2[1] = new character2();
 		
-		Character2[1].setY(50);
+		Character2[1].setY(Character2[0].getY());
 		
-		Character2[1].setX(300);
+		Character2[1].setX(Character2[0].getX() - 350);
 		
-		Character2[1].setHeight(80);
+		Character2[1].setHeight(65);
 		
-		Character2[1].setWidth(80);
+		Character2[1].setWidth(65);
 		
 		Character2[1].setImage("Ghost.gif");
 		
@@ -106,13 +114,13 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		    Character2[2] = new character2();
 			
-			Character2[2].setY(50);
+			Character2[2].setY(Character2[0].getY());
 			
-			Character2[2].setX(600);
+			Character2[2].setX(Character2[1].getX() - 350);
 			
-			Character2[2].setHeight(80);
+			Character2[2].setHeight(65);
 			
-			Character2[2].setWidth(80);
+			Character2[2].setWidth(65);
 			
 			Character2[2].setImage("Ghost.gif");
 			
@@ -122,17 +130,60 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			Character2[2].updateRectanglePosition();
 			
+			
+			// Second row of ghosts 
+			
+			
+			for (int i = 0; i < 3; i++) {
+				
+				Character2_secondRow[i] = new character2();
+				
+				if (i == 0) {
+					
+					Character2_secondRow[i].setY(400);
+					
+					Character2_secondRow[i].setX(0);
+					
+					
+				} else {
+					
+					Character2_secondRow[i].setY(Character2_secondRow[0].getY());
+					
+					Character2_secondRow[i].setX(Character2_secondRow[0].getX() - 350);
+				}
+				
+				
+				
+				Character2_secondRow[i].setHeight(Character2[0].getHeight());
+				
+				Character2_secondRow[i].setWidth(Character2[0].getWidth());
+				
+				Character2_secondRow[i].setImage(Character2[0].getImage());
+				
+				Character2_secondRow[i].setCharacter1(Character1);
+				
+				Character2_secondRow[i].updateRectangleSize();
+				
+				Character2_secondRow[i].updateRectanglePosition();
+				
+				
+			}
 		
 		
 		//
 		
 		backgroundImage = new backgroundImage();
 		
-		backgroundImage.setHeight(1200);
+		backgroundImage.setHeight(800);
 		
-		backgroundImage.setWidth(800);
+		backgroundImage.setWidth(900);
 		
-		backgroundImage.setImage("landscape.jpg");
+		backgroundImage.setImage("Darkterrain.jpg");
+		
+		
+		// set up second background image
+		
+		
 		
 	// set up the screen
 		
@@ -158,11 +209,17 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		character1Label.setLocation(Character1.getX(), Character1.getY());
 		
-		Character2[0].setCharacter1Label(character1Label);
 		
-		Character2[1].setCharacter1Label(character1Label);
-
-		Character2[2].setCharacter1Label(character1Label);
+		for (int i = 0 ; i < 3; i ++) {
+			
+			
+			Character2[i].setCharacter1Label(character1Label);
+			
+			Character2_secondRow[i].setCharacter1Label(character1Label);
+			
+		}
+		
+	
 		
 		
 		
@@ -207,6 +264,25 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2[2].setCharacter2Label(character2Label[2]);
 		
+		// Label for second row of ghosts
+		
+		
+		for (int i = 0; i < 3; i++) {
+			
+			
+			character2_secondRowLabel[i] = new JLabel();
+			
+			character2_secondRowLabel[i].setIcon(character2Image);
+			
+			character2_secondRowLabel[i].setSize(Character2[0].getWidth(), Character2[2].getHeight());
+			
+			character2_secondRowLabel[i].setLocation(Character2_secondRow[0].getX(), Character2_secondRow[0].getY());
+			
+			Character2_secondRow[i].setCharacter2Label(character2_secondRowLabel[i]);
+			
+			
+		}
+		
 		
 		//background label
 		
@@ -216,7 +292,13 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		backgroundLabel.setIcon(backgroundImg);
 		
-		backgroundLabel.setSize(gameProperties.screen_width, gameProperties.screen_height);
+		backgroundLabel.setSize(backgroundImage.getWidth(), backgroundImage.getHeight());
+		
+		
+		
+		
+		//second background label
+		
 		
 		
 		
@@ -232,11 +314,15 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		startButton.setFocusable(false);
 		
-		Character2[0].setStartButton(startButton);
+		for (int i = 0 ; i < 3;  i++) {
+			
+			Character2[i].setStartButton(startButton);
+			
+			Character2_secondRow[i].setStartButton(startButton);
+			
+		}
 		
-		Character2[1].setStartButton(startButton);
 		
-		Character2[2].setStartButton(startButton);
 		
 		
 		
@@ -265,12 +351,22 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		visibilityButton.addActionListener(this);
 		
 		add(character1Label);
-		add(character2Label[0]);
 		
-		add(character2Label[1]);
 		
-		add(character2Label[2]);
+		for (int i = 0 ; i < 3 ; i++) {
+			
+			
+			add(character2Label[i]);
+			
+			add(character2_secondRowLabel[i]);
+		
+		}
+		
+	
 		add(backgroundLabel);
+		
+		
+		
 		
 		content.addKeyListener(this);
 		
@@ -378,23 +474,24 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// 
 		
+		for ( int i  = 0 ; i < 3 ; i++) {
+			
+			
 		if (e.getSource() == startButton) {
 			
 			if (Character2[0].getIsMoving()) {
 				
-				Character2[0].setIsMoving(false);
+				Character2[i].setIsMoving(false);
 				
-				Character2[1].setIsMoving(false);
-				
-				Character2[2].setIsMoving(false);
-				
+				Character2_secondRow[i].setIsMoving(false);
+			
 			} else {
 				
-				Character2[0].startMoving();
+				Character2[i].startMoving();
 				
-				Character2[1].startMoving();
+				Character2_secondRow[i].startMoving();
 				
-				Character2[2].startMoving();
+			
 			}
 			
 		} else if (e.getSource() == visibilityButton) {
@@ -404,41 +501,35 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			if (Character2[0].getVisible()) {
 				
 				
-				Character2[0].setVisible(false);
+				Character2[i].setVisible(false);
 				
-				Character2[1].setVisible(false);
+				Character2_secondRow[i].setVisible(false);
 				
-				Character2[2].setVisible(false);
 				
-				character2Label[0].setVisible(Character2[0].getVisible());
+				character2Label[i].setVisible(Character2[i].getVisible());
 				
-				character2Label[1].setVisible(Character2[1].getVisible());
-				
-				character2Label[2].setVisible(Character2[1].getVisible());
-				
+				character2_secondRowLabel[i].setVisible(Character2_secondRow[i].getVisible());
 				
 				visibilityButton.setText("show");
 				
 				
 			} else {
 				
-				Character2[0].setVisible(true);
+				Character2[i].setVisible(true);
 				
-				Character2[1].setVisible(true);
+				Character2_secondRow[i].setVisible(true);
 				
-				Character2[2].setVisible(true);
 				
-				character2Label[0].setVisible(Character2[0].getVisible());
+				character2Label[i].setVisible(Character2[i].getVisible());
 				
-				character2Label[1].setVisible(Character2[1].getVisible());
+				character2_secondRowLabel[i].setVisible(Character2_secondRow[i].getVisible());
 				
-				character2Label[2].setVisible(Character2[2].getVisible());
 				
 				visibilityButton.setText("hide");
 			}
 		}
 		
-		
+		}
 	}
 
 
