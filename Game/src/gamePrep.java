@@ -49,11 +49,11 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character1.setY(380);
 		
-		Character1.setHeight(112);
+		Character1.setHeight(120);
 		
-		Character1.setWidth(128);
+		Character1.setWidth(122);
 		
-		Character1.setImage("catgif.gif");
+		Character1.setImage("girlRun.gif");
 		
 		Character1.updateRectangleSize();
 		
@@ -68,11 +68,11 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2[0].setX(0);
 		
-		Character2[0].setHeight(240);
+		Character2[0].setHeight(80);
 		
-		Character2[0].setWidth(240);
+		Character2[0].setWidth(80);
 		
-		Character2[0].setImage("wolf_run.gif");
+		Character2[0].setImage("Ghost.gif");
 		
 		Character2[0].setCharacter1(Character1);
 		
@@ -88,11 +88,11 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2[1].setX(300);
 		
-		Character2[1].setHeight(240);
+		Character2[1].setHeight(80);
 		
-		Character2[1].setWidth(240);
+		Character2[1].setWidth(80);
 		
-		Character2[1].setImage("wolf_run.gif");
+		Character2[1].setImage("Ghost.gif");
 		
 		Character2[1].setCharacter1(Character1);
 		
@@ -110,11 +110,11 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			Character2[2].setX(600);
 			
-			Character2[2].setHeight(240);
+			Character2[2].setHeight(80);
 			
-			Character2[2].setWidth(240);
+			Character2[2].setWidth(80);
 			
-			Character2[2].setImage("wolf_run.gif");
+			Character2[2].setImage("Ghost.gif");
 			
 			Character2[2].setCharacter1(Character1);
 			

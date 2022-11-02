@@ -16,7 +16,7 @@ public class character2 extends sprite implements Runnable {
    
 	
 	public  character2(){
-    	  super(0,0,240,240,"wolf_run.gif");
+    	  super(0,0,80,80,"Ghost.gif");
     	  
     	  this.visible = true;
     	  
@@ -141,7 +141,7 @@ public class character2 extends sprite implements Runnable {
 			
 			// move character 2 while isMoving = true;
 			
-			 currentX += gameProperties.character_step;
+			 currentX += gameProperties.character_step - 20;
 			 
 			 if (currentX >= gameProperties.screen_width) {
 					currentX = -1 * this.width;
