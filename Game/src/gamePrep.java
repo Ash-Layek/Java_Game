@@ -183,13 +183,16 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		backgroundImage.setImage("Darkterrain.jpg");
 		
 		
-		// set up second background image
+		// set up second background image : Water / Lava
 		
 		Lava = new lava();
 		
 		Lava.setHeight(250);
 		
 		Lava.setWidth(900);
+		
+		Lava.setY(20);
+		
 		
 		Lava.setImage("Lava.gif");
 		
@@ -275,6 +278,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		character2Label[2].setLocation(Character2[1].getX(), Character2[1].getY());
 		
 		Character2[2].setCharacter2Label(character2Label[2]);
+		
 		
 		// Label for second row of ghosts
 		
@@ -487,6 +491,9 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	Character1.updateRectanglePosition();
 	
 	character1Label.setLocation(Character1.getX(), Character1.getY());
+	
+	
+
 		
 	
 	}
@@ -552,6 +559,12 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		}
 		
 		}
+		
+		
+		
+		
+		
+		
 	}
 
 

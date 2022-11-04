@@ -16,6 +16,8 @@ public class character2 extends sprite implements Runnable {
    
    private JButton startButton;
    
+   private lava Lava;
+   
 	
 	public  character2(){
     	  super(0,0,65,65,"Ghost.gif");
@@ -110,6 +112,7 @@ public class character2 extends sprite implements Runnable {
 	public void displayLocation() {
 		
 		System.out.println("x,y: " + this.x + "," + this.y);
+		System.out.println(  Character1.getY());
 		System.out.println("width,height: " + this.width + "," + height);
 		System.out.println("image: " + this.image);
 		//super.Display();
@@ -152,7 +155,6 @@ public class character2 extends sprite implements Runnable {
 			 
 			 this.setX(currentX);
 			 
-			
 			 this.updateRectanglePosition();
 			 
 			 displayLocation();
@@ -168,17 +170,7 @@ public class character2 extends sprite implements Runnable {
 				this.character2Label.setLocation(this.x, this.y);
 				
 				
-				Random number  = new Random();
-				
-				int low = 1;
-				
-				int high  = 100;
-				
-				
-				int result = number.nextInt(high-low) + low;
-				
-		
-				
+	
 				
 				try {
 					
@@ -218,6 +210,35 @@ public class character2 extends sprite implements Runnable {
 			
 			
 		}
+		
+		
+
+		if (Character1.getY() <= 165 && Character1.getY() >= 20) {
+			
+			
+			System.out.println("GAME OVER , YOU FELL INTO THE LAVA");
+			
+			try {
+				
+				
+				Thread.sleep(100000);
+				
+				
+			} catch (Exception e) {
+				
+				System.out.print(e);
+				
+			}
+			
+		} else if (Character1.getY() < 20) {
+			
+			
+			System.out.println("YOU CLEARED THE LEVEL");
+			
+		}
+		
+		
+		
 	}
 	
 	
