@@ -22,6 +22,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private backgroundImage backgroundImage;
 	
+	private lava Lava;
+	
 	
 	
 	
@@ -33,11 +35,11 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private Container content;
 	
-	private JLabel character1Label, backgroundLabel, backgroundLabel2;
+	private JLabel character1Label, backgroundLabel, lavaLabel;
 	
 	private JLabel[] character2Label = new JLabel[3], character2_secondRowLabel = new JLabel[3];
 	
-	private ImageIcon character1Image, character2Image, backgroundImg, backgroundImg2;
+	private ImageIcon character1Image, character2Image, backgroundImg, lavaImg;;
 	
 	private JButton startButton;
 	
@@ -149,7 +151,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 					
 					Character2_secondRow[i].setY(Character2_secondRow[0].getY());
 					
-					Character2_secondRow[i].setX(Character2_secondRow[0].getX() - 350);
+					Character2_secondRow[i].setX(Character2_secondRow[1].getX() - 350);
 				}
 				
 				
@@ -182,6 +184,16 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		
 		// set up second background image
+		
+		Lava = new lava();
+		
+		Lava.setHeight(250);
+		
+		Lava.setWidth(900);
+		
+		Lava.setImage("Lava.gif");
+		
+		
 		
 		
 		
@@ -299,7 +311,13 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		//second background label
 		
+		lavaLabel  = new JLabel();
 		
+		lavaImg = new ImageIcon(getClass().getResource(Lava.getImage()));
+		
+		lavaLabel.setIcon(lavaImg);
+		
+		lavaLabel.setSize(Lava.getWidth(), Lava.getHeight());
 		
 		
 		
@@ -363,10 +381,14 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		}
 		
 	
+		add(lavaLabel);
 		add(backgroundLabel);
 		
 		
 		
+		
+		
+	
 		
 		content.addKeyListener(this);
 		
@@ -479,7 +501,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 		if (e.getSource() == startButton) {
 			
-			if (Character2[0].getIsMoving()) {
+			if (Character2[i].getIsMoving()) {
 				
 				Character2[i].setIsMoving(false);
 				
@@ -498,7 +520,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			
 			
-			if (Character2[0].getVisible()) {
+			if (Character2[i].getVisible()) {
 				
 				
 				Character2[i].setVisible(false);
