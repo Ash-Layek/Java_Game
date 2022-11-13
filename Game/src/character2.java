@@ -18,6 +18,10 @@ public class character2 extends sprite implements Runnable {
    
    private lava Lava;
    
+   private Boolean inter = false;
+   
+   
+   private JButton button;
 	
 	public  character2(){
     	  super(0,0,65,65,"Ghost.gif");
@@ -36,12 +40,23 @@ public class character2 extends sprite implements Runnable {
 	
 	
 	
+	
+
+	
+	
 	public void setCharacter1Label(JLabel temp) {
 		
 		this.character1Label = temp;
 	}
 	
-
+	
+	public void setRestartButton(JButton temp) {
+		
+		
+		this.button = temp;
+	}
+	
+	
 	
 	public void setCharacter1(character1 temp) {
 		
@@ -91,6 +106,15 @@ public class character2 extends sprite implements Runnable {
 	}
 	
 	
+	public Boolean getInter() {
+		
+		return inter;
+	}
+	
+	public void setInter(Boolean temp) {
+		
+		this.inter = temp;
+	}
 	
 	public void startMoving()
 	{
@@ -108,7 +132,7 @@ public class character2 extends sprite implements Runnable {
 		
 	}
 	
-	
+  
 	public void displayLocation() {
 		
 		System.out.println("x,y: " + this.x + "," + this.y);
@@ -118,6 +142,7 @@ public class character2 extends sprite implements Runnable {
 		//super.Display();
 		System.out.println("visible: " + this.visible);
 		System.out.println("moving: " + this.isMoving);
+		
 	}
 	
 	
@@ -137,34 +162,75 @@ public class character2 extends sprite implements Runnable {
 		this.character2Label.setIcon(new ImageIcon(getClass().getResource(this.getImage())));
 		
 		
+		
 		while (this.isMoving) {
 			
 			int currentX = this.x;
 			
+			int rowX = this.x;
+			
+			
+			
 			int currentY = this.y;
+			
+			
 			
 			
 			// move character 2 while isMoving = true;
 			
-			 currentX += gameProperties.character_step - 15;
+			
+			if (currentY > 400) {
+				
+				currentX += gameProperties.character_step ;
+				 
+				 if (currentX >= gameProperties.screen_width) {
+						currentX = -1 * this.width;
+					}
+				 
+				 
+				 
+				 
+				 this.setX(currentX);
+				 
+			
+			}
+			
 			 
-			 if (currentX >= gameProperties.screen_width) {
-					currentX = -1 * this.width;
-				}
+			 
+			 if (this.getY() == gameProperties.ghost2_Y) {
+				 
+				 rowX += gameProperties.ghost2_step;
+				 
+				 
+				 if (rowX >= gameProperties.screen_width) {
+						rowX = -1 * this.width;
+					}
+				 
+				 
+				 
+				 
+				 this.setX(rowX);
+				 
+			 }
 			 
 			 
-			 this.setX(currentX);
+			 
+			 
+			
 			 
 			 this.updateRectanglePosition();
 			 
-			 displayLocation();
+			
+		    
+			
+			 
+			// displayLocation();
 			 
 			 // check collision
 			 
 			if (this.visible) this.detectCollision();
 			 
-			//	if ( this.visible ) this.detectCollision();
-				
+		
 				
 				
 				this.character2Label.setLocation(this.x, this.y);
@@ -197,52 +263,40 @@ public class character2 extends sprite implements Runnable {
 		
 		if (r.intersects(Character1.getRectangle())) {
 			
+	
 			
+			button.setVisible(true);
 			
+
 			
-			System.out.println("BOOM");
+		//	System.out.println("BOOM");
 			
-			System.out.print(Character1.getRectangle());
+		//	System.out.print(Character1.getRectangle());
 			
-			System.out.print(this.getRectangle());
+			//System.out.print(this.getRectangle());
 			
 			this.isMoving = false;
 			
 			
+			
+			
 		}
+		
+		
 		
 		
 
-		if (Character1.getY() <= 165 && Character1.getY() >= 20) {
-			
-			
-			System.out.println("GAME OVER , YOU FELL INTO THE LAVA");
-			
-			try {
-				
-				
-				Thread.sleep(100000);
-				
-				
-			} catch (Exception e) {
-				
-				System.out.print(e);
-				
-			}
-			
-		} else if (Character1.getY() < 20) {
-			
-			
-			System.out.println("YOU CLEARED THE LEVEL");
-			
-		}
-		
+	
 		
 		
 	}
 	
 	
 	
+	
+	
+	
+ 
 	
 	
 }

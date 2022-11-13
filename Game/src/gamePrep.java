@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class gamePrep extends JFrame implements KeyListener, ActionListener {
 
@@ -16,13 +18,33 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private character1 Character1;
 	
-	private character2[] Character2 = new character2[3];
+	private character2[] Character2 = new character2[4];
 	
-	private character2[] Character2_secondRow = new character2[3];
+	private character2[] Character2_secondRow = new character2[4];
 	
 	private backgroundImage backgroundImage;
 	
 	private lava Lava;
+	
+	private log[] Log  = new log[4], secondRowLog = new log[4], thirdRowLog = new log[4];
+	
+	private Boolean wonCondition = false;
+	
+	private int intScore;
+	
+	private Db db;
+	
+	private String name, score;
+	
+	
+	
+
+	
+	private JTextField user_name, user_score;
+	
+
+	
+
 	
 	
 	
@@ -35,13 +57,20 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private Container content;
 	
-	private JLabel character1Label, backgroundLabel, lavaLabel;
+	private JLabel character1Label, backgroundLabel, lavaLabel, scoreLabel, score_label, name_label;
 	
-	private JLabel[] character2Label = new JLabel[3], character2_secondRowLabel = new JLabel[3];
+	private JLabel[] character2Label = new JLabel[4], character2_secondRowLabel = new JLabel[4], logLabel = new JLabel[4], secondRowLabel = new JLabel[4];
 	
-	private ImageIcon character1Image, character2Image, backgroundImg, lavaImg;;
+	private JLabel[] thirdRowLabel = new JLabel[4];
 	
+	
+	
+	private ImageIcon character1Image, character2Image, backgroundImg, lavaImg, logImg;
 	private JButton startButton;
+	
+	private JButton wonGameButton, submitButton;
+	
+	gameWon gamewon;
 	
 	private JButton visibilityButton;
 	
@@ -74,7 +103,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2[0] = new character2();
 		
-		Character2[0].setY(600);
+		Character2[0].setY(gameProperties.ghost1_Y);
 		
 		Character2[0].setX(0);
 		
@@ -96,7 +125,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Character2[1].setY(Character2[0].getY());
 		
-		Character2[1].setX(Character2[0].getX() - 350);
+		Character2[1].setX(Character2[0].getX() - 200);
 		
 		Character2[1].setHeight(65);
 		
@@ -118,7 +147,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			Character2[2].setY(Character2[0].getY());
 			
-			Character2[2].setX(Character2[1].getX() - 350);
+			Character2[2].setX(Character2[1].getX() - 200);
 			
 			Character2[2].setHeight(65);
 			
@@ -131,27 +160,269 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			Character2[2].updateRectangleSize();
 			
 			Character2[2].updateRectanglePosition();
+			// 
+			
+			 Character2[3] = new character2();
+				
+				Character2[3].setY(Character2[0].getY());
+				
+				Character2[3].setX(Character2[2].getX() - 200);
+				
+				Character2[3].setHeight(65);
+				
+				Character2[3].setWidth(65);
+				
+				Character2[3].setImage("Ghost.gif");
+				
+				Character2[3].setCharacter1(Character1);
+				
+				Character2[3].updateRectangleSize();
+				
+				Character2[3].updateRectanglePosition();
+			
+				
+				// ----------------------- Score label
+				
+				
+				scoreLabel  = new JLabel();
+				
+				scoreLabel.setSize(100, 100);
+				
+				scoreLabel.setLocation(0, 10);
+				
+				scoreLabel.setFont(new Font("Calibri", Font.BOLD, 20));
+				
+				scoreLabel.setForeground(Color.GREEN);
+				
+				scoreLabel.setText("Score : " + intScore);
+				
+				
+				// ---------------------------------------
+				
+			
+				
+				
+				
+				
+				user_name = new JTextField();
+				
+				user_name.setBounds(0, 30, 200, 200);
+				
+				user_name.setVisible(false);
+				
+				
+			
+				user_score = new JTextField();
+				
+				user_score.setBounds(500,30,200,200);
+				
+				user_score.setVisible(false);
+				
+				// -----------------------------
+				
+				score_label = new JLabel();
+				
+				score_label.setSize(100,100);
+				
+				score_label.setLocation(1,30);
+				
+				score_label.setText("Enter Name");
+				
+				score_label.setFont(new Font("Calibri", Font.BOLD, 20));
+				
+				scoreLabel.setForeground(Color.BLUE);
+				
+				score_label.setVisible(false);
+				
+				
+				
+				// ----------------------- 
+				
+				
+                name_label = new JLabel();
+				
+				name_label.setSize(100,100);
+				
+				name_label.setLocation(520,30);
+				
+				name_label.setText("Enter score");
+				
+				name_label.setFont(new Font("Calibri", Font.BOLD, 20));
+				
+				name_label.setForeground(Color.BLUE);
+				
+				name_label.setVisible(false);
+				
+				
+				
+				
+			
+			
+		// log test
+			
+			
+			for (int i = 0; i < 4 ; i++) {
+				
+			
+				Log[i] = new log();
+				
+				secondRowLog[i] = new log();
+				
+				thirdRowLog[i] = new log();
+				
+				
+				if (i == 0) {
+					
+					Log[i].setY(gameProperties.Log1_Y);
+					
+					Log[i].setX(gameProperties.Log1_X);
+					
+					
+					secondRowLog[i].setY(gameProperties.Log2_Y);
+					
+					secondRowLog[i].setX(gameProperties.Log2_X);
+					
+					thirdRowLog[i].setY(gameProperties.Log3_Y);
+					
+					thirdRowLog[i].setX(gameProperties.Log3_X);
+					
+					
+					
+				} else if (i == 1) {
+					
+					
+                     Log[i].setY(gameProperties.Log1_Y);
+					
+					Log[i].setX(Log[0].getX() - 150);
+					
+                    secondRowLog[i].setY(gameProperties.Log2_Y);
+					
+					secondRowLog[i].setX(secondRowLog[0].getX() - 185);
+					
+					thirdRowLog[i].setY(gameProperties.Log3_Y);
+					
+					thirdRowLog[i].setX(thirdRowLog[0].getX() - 185);
+					
+				} else if ( i == 2) {
+					
+					
+					 Log[i].setY(gameProperties.Log1_Y);
+					 
+					 Log[i].setX(Log[0].getX() + 185);
+					 
+					  secondRowLog[i].setY(gameProperties.Log2_Y);
+						
+						secondRowLog[i].setX(secondRowLog[0].getX() + 185);
+						
+						thirdRowLog[i].setY(gameProperties.Log3_Y);
+						
+						thirdRowLog[i].setX(thirdRowLog[0].getX() + 150);
+					
+					
+				} else if (i == 3) {
+					
+					
+					Log[i].setY(gameProperties.Log1_Y);
+					
+					Log[i].setX(Log[2].getX() + 185 );
+					
+					 secondRowLog[i].setY(gameProperties.Log2_Y);
+						
+						secondRowLog[i].setX(secondRowLog[2].getX() + 185);
+						
+	
+						thirdRowLog[i].setY(gameProperties.Log3_Y);
+						
+						thirdRowLog[i].setX(thirdRowLog[2].getX() + 185 );
+						
+				}
+				
+				
+				
+				
+				
+				Log[i].setHeight(52);
+				
+				
+				Log[i].setWidth(147);
+				
+				Log[i].setImage("Log.png");
+				
+				Log[i].setCharacter1(Character1);
+				
+				Log[i].updateRectanglePosition();
+				
+				Log[i].updateRectangleSize();
+				
+				//------------------------------
+				
+				secondRowLog[i].setHeight(52);
+				
+				secondRowLog[i].setWidth(147);
+				
+				secondRowLog[i].setCharacter1(Character1);
+				
+				secondRowLog[i].setImage(Log[0].getImage());
+				
+				secondRowLog[i].updateRectanglePosition();
+				
+				secondRowLog[i].updateRectangleSize();
+				
+				//------------------------
+				
+				
+				thirdRowLog[i].setHeight(52);
+				
+				thirdRowLog[i].setWidth(147);
+				
+				thirdRowLog[i].setCharacter1(Character1);
+				
+				thirdRowLog[i].setImage(Log[0].getImage());
+				
+				thirdRowLog[i].updateRectanglePosition();
+				
+				thirdRowLog[i].updateRectangleSize();
+				
+			}
+			
+			
+		
+			
+			
+			// ------------------------
 			
 			
 			// Second row of ghosts 
 			
 			
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 4; i++) {
 				
 				Character2_secondRow[i] = new character2();
 				
 				if (i == 0) {
 					
-					Character2_secondRow[i].setY(400);
+					Character2_secondRow[i].setY(gameProperties.ghost2_Y);
 					
 					Character2_secondRow[i].setX(0);
 					
 					
-				} else {
+				} else if (i == 1){
 					
 					Character2_secondRow[i].setY(Character2_secondRow[0].getY());
 					
-					Character2_secondRow[i].setX(Character2_secondRow[1].getX() - 350);
+					Character2_secondRow[i].setX(Character2_secondRow[0].getX() - 200);
+					
+				} else if (i == 2) {
+					
+                    Character2_secondRow[i].setY(Character2_secondRow[0].getY());
+					
+					Character2_secondRow[i].setX(Character2_secondRow[1].getX() - 200);
+					
+				} else if (i == 3) {
+					
+                     Character2_secondRow[i].setY(Character2_secondRow[0].getY());
+					
+					Character2_secondRow[i].setX(Character2_secondRow[2].getX() - 200);
 				}
 				
 				
@@ -167,6 +438,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				Character2_secondRow[i].updateRectangleSize();
 				
 				Character2_secondRow[i].updateRectanglePosition();
+		
 				
 				
 			}
@@ -187,19 +459,30 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		Lava = new lava();
 		
-		Lava.setHeight(250);
+		Lava.setHeight(300);
 		
 		Lava.setWidth(900);
 		
-		Lava.setY(20);
-		
+		Lava.setY(0);
 		
 		Lava.setImage("Lava.gif");
 		
 		
 		
+		// ----------------------
 		
 		
+		submitButton = new JButton("Submit");
+		
+		submitButton.setSize(100,100);
+		
+		submitButton.setLocation(190, 450);
+		
+		submitButton.setFocusable(true);
+		
+		submitButton.setVisible(false);
+		
+	
 	// set up the screen
 		
 		setSize(gameProperties.screen_width, gameProperties.screen_height);
@@ -224,15 +507,78 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		character1Label.setLocation(Character1.getX(), Character1.getY());
 		
+		// second row 
 		
-		for (int i = 0 ; i < 3; i ++) {
+		for (int i = 0 ; i < 4; i ++) {
 			
 			
 			Character2[i].setCharacter1Label(character1Label);
 			
+			
 			Character2_secondRow[i].setCharacter1Label(character1Label);
 			
+			Log[i].setCharacter1Label(character1Label);
+			
+			secondRowLog[i].setCharacter1Label(character1Label);
+			
+			thirdRowLog[i].setCharacter1Label(character1Label);
+			
 		}
+		
+	
+		
+		// graphic elements label for log
+		
+		
+	   for (int  i = 0; i < 4; i++) {
+		   
+		   
+		   logLabel[i] = new JLabel();
+			
+			logImg = new ImageIcon(getClass().getResource(Log[i].getImage()));
+			
+			logLabel[i].setIcon(logImg);
+			
+			logLabel[i].setSize(Log[i].getWidth(), Log[i].getHeight());
+			
+			logLabel[i].setLocation(Log[i].getX(), Log[i].getY());
+			
+			Log[i].setLogLabel(logLabel[i]);
+			
+			//------------------
+			
+			secondRowLabel[i] = new JLabel();
+			
+			secondRowLabel[i].setIcon(logImg);
+			
+			secondRowLabel[i].setSize(secondRowLog[i].getWidth(), secondRowLog[i].getHeight());
+			
+			secondRowLabel[i].setLocation(secondRowLog[i].getX(), secondRowLog[i].getY());
+			
+			secondRowLog[i].setLogLabel(secondRowLabel[i]);
+			
+			// ---------------------------------
+			
+			
+			thirdRowLabel[i] = new JLabel();
+			
+			thirdRowLabel[i].setIcon(logImg);
+			
+			thirdRowLabel[i].setSize(thirdRowLog[i].getWidth(), thirdRowLog[i].getHeight());
+			
+			thirdRowLabel[i].setLocation(thirdRowLog[i].getX(), thirdRowLog[i].getY());
+			
+			thirdRowLog[i].setLogLabel(thirdRowLabel[i]);
+			
+			
+
+		   
+	   }
+		
+		
+		
+	
+	
 		
 	
 		
@@ -241,7 +587,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		
 		// graphic elements for character2
-		
+				
 		character2Label[0] = new JLabel();
 		
 		
@@ -275,26 +621,39 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		character2Label[2].setSize(Character2[1].getWidth(), Character2[1].getHeight());
 		
-		character2Label[2].setLocation(Character2[1].getX(), Character2[1].getY());
+		character2Label[2].setLocation(Character2[2].getX(), Character2[2].getY());
 		
 		Character2[2].setCharacter2Label(character2Label[2]);
+		
+		//-------------
+		
+        character2Label[3] = new JLabel();
+		
+		character2Label[3].setIcon(character2Image);
+		
+		character2Label[3].setSize(Character2[1].getWidth(), Character2[1].getHeight());
+		
+		character2Label[3].setLocation(Character2[3].getX(), Character2[3].getY());
+		
+		Character2[3].setCharacter2Label(character2Label[3]);
 		
 		
 		// Label for second row of ghosts
 		
 		
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			
 			
 			character2_secondRowLabel[i] = new JLabel();
 			
 			character2_secondRowLabel[i].setIcon(character2Image);
 			
-			character2_secondRowLabel[i].setSize(Character2[0].getWidth(), Character2[2].getHeight());
+			character2_secondRowLabel[i].setSize(Character2[0].getWidth(), Character2[0].getHeight());
 			
 			character2_secondRowLabel[i].setLocation(Character2_secondRow[0].getX(), Character2_secondRow[0].getY());
 			
 			Character2_secondRow[i].setCharacter2Label(character2_secondRowLabel[i]);
+			
 			
 			
 		}
@@ -336,13 +695,25 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		startButton.setFocusable(false);
 		
-		for (int i = 0 ; i < 3;  i++) {
+		for (int i = 0 ; i < 4;  i++) {
 			
 			Character2[i].setStartButton(startButton);
 			
 			Character2_secondRow[i].setStartButton(startButton);
 			
+			Log[i].setStartButton(startButton);
+			
+			secondRowLog[i].setStartButton(startButton);
+			
+			thirdRowLog[i].setStartButton(startButton);
+			
+			
+			
 		}
+		
+		
+		
+		
 		
 		
 		
@@ -362,33 +733,90 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		// populate screen
 		
 		
+		gamewon = new gameWon();
 		
+		gamewon.setWin(wonGameButton);
+		
+		gamewon.getWin();
+		
+		
+		wonGameButton = gamewon.getWin();
+		
+		
+		
+		for (int i = 0 ; i < 4; i++) {
+			
+			Character2[i].setRestartButton(wonGameButton);
+			
+			Character2_secondRow[i].setStartButton(wonGameButton);
+		}
+		
+		
+		
+	
+	
+		add(wonGameButton);
+		
+		add(submitButton);
+		
+		add(scoreLabel);
 		
 		add(startButton);
 		
+        add(name_label);
+		
+		add(score_label);
+		
+		add(user_name);
+		
+		add(user_score);
+		
+		
+		
 		startButton.addActionListener(this);
+		
+		submitButton.addActionListener(this);
 		
 		add(visibilityButton);
 		
 		visibilityButton.addActionListener(this);
 		
+		wonGameButton.addActionListener(this);
+		
+	
+		
 		add(character1Label);
 		
 		
-		for (int i = 0 ; i < 3 ; i++) {
+		for (int i = 0 ; i < 4 ; i++) {
+			
+			
+			
 			
 			
 			add(character2Label[i]);
 			
 			add(character2_secondRowLabel[i]);
+			
+			
+			 add(logLabel[i]);
+			
+			add(secondRowLabel[i]);
+			
+			add(thirdRowLabel[i]);
+			
+			
 		
 		}
 		
 	
-		add(lavaLabel);
+	
+		// add(wonGameButton)
+		
+		 add(lavaLabel);
+		
+	
 		add(backgroundLabel);
-		
-		
 		
 		
 		
@@ -404,6 +832,10 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	}
 	
 	
+	
+
+
+
 	public static void main(String args []){
 		
 		gamePrep myGame = new gamePrep();
@@ -411,7 +843,6 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		myGame.setVisible(true);
 		
 	
-		
 	}
 	
 	@Override
@@ -429,7 +860,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 	if (e.getKeyCode() == KeyEvent.VK_UP) {
 		
-		y -= gameProperties.character_step;
+		y -= gameProperties.MC_step;
 		
 		if (y + Character1.getHeight() <= 0) {
 			
@@ -440,7 +871,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 	} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 		
-		x -= gameProperties.character_step;
+		x -= gameProperties.MC_step;
 		
 		if (x + Character1.getWidth() <= 0) {
 			
@@ -450,7 +881,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 		
 		
-		y+=  gameProperties.character_step;
+		y+=  gameProperties.MC_step;
 		
 		
 		if (y  >= gameProperties.screen_height) {
@@ -464,7 +895,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 		
 		
-		x += gameProperties.character_step;
+		x += gameProperties.MC_step;
 		
 		
 		if (x >= gameProperties.screen_width) {
@@ -481,7 +912,10 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		System.out.println("Invalid");
 		
+		
 	}
+	
+	
 	
 	Character1.setX(x);
 	
@@ -492,18 +926,24 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	character1Label.setLocation(Character1.getX(), Character1.getY());
 	
+	 gameWon();
+	
+	
+
+		}
+	
 	
 
 		
 	
-	}
+	
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 
 		
-		for ( int i  = 0 ; i < 3 ; i++) {
+		for ( int i  = 0 ; i < 4 ; i++) {
 			
 			
 		if (e.getSource() == startButton) {
@@ -513,12 +953,26 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				Character2[i].setIsMoving(false);
 				
 				Character2_secondRow[i].setIsMoving(false);
+				
+				Log[i].setIsMoving(false);
+				
+				secondRowLog[i].setIsMoving(false);
+				
+				thirdRowLog[i].setIsMoving(false);
+				
+			
 			
 			} else {
 				
 				Character2[i].startMoving();
 				
 				Character2_secondRow[i].startMoving();
+				
+				Log[i].startMoving();
+				
+				secondRowLog[i].startMoving();
+				
+				thirdRowLog[i].startMoving();
 				
 			
 			}
@@ -532,12 +986,26 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				
 				Character2[i].setVisible(false);
 				
+			
+				
 				Character2_secondRow[i].setVisible(false);
+				
+				Log[i].setVisible(false);
+				
+				secondRowLog[i].setVisible(false);
+				
+				thirdRowLog[i].setVisible(false);
 				
 				
 				character2Label[i].setVisible(Character2[i].getVisible());
 				
 				character2_secondRowLabel[i].setVisible(Character2_secondRow[i].getVisible());
+				
+				logLabel[i].setVisible(Log[i].getVisible());
+				
+				secondRowLabel[i].setVisible(secondRowLog[i].getVisible());
+				
+				thirdRowLabel[i].setVisible(thirdRowLog[i].getVisible());
 				
 				visibilityButton.setText("show");
 				
@@ -548,10 +1016,22 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				
 				Character2_secondRow[i].setVisible(true);
 				
+				Log[i].setVisible(true);
+				
+				secondRowLog[i].setVisible(true);
+				
+				thirdRowLog[i].setVisible(true);
+				
 				
 				character2Label[i].setVisible(Character2[i].getVisible());
 				
 				character2_secondRowLabel[i].setVisible(Character2_secondRow[i].getVisible());
+				
+				logLabel[i].setVisible(Log[i].getVisible());
+				
+				secondRowLabel[i].setVisible(secondRowLog[i].getVisible());
+				
+				thirdRowLabel[i].setVisible(thirdRowLog[i].getVisible());
 				
 				
 				visibilityButton.setText("hide");
@@ -563,9 +1043,47 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		
 		
+		if (e.getSource() == wonGameButton) {
+			
+			
+			
+			
+         						lostGame();
+       
+			
+			
+		}
 		
 		
+		if (e.getSource() == submitButton) {
+			
+			
+	        // TODO Auto-generated method stub
+	       
+	            name = user_name.getText();
+	            score = user_score.getText();
+
+	            Db db = new Db();
+	            
+	            db.setName(name);
+
+	            int Scory= Integer.parseInt(score);
+	            
+	            db.setScore(score);
+	            
+
+	            db.Insert();
+	            
+	                  
+
+	    }
 	}
+		
+		
+		
+
+	
+	
 
 
 	@Override
@@ -574,5 +1092,63 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 	}
 	
+	
+	public void lostGame() {
+		
+		
+		
+		Character1.setX(350);
+		
+		Character1.setY(700);
+		
+		character1Label.setLocation(Character1.getX(), Character1.getY());
+		
+	
+	
+		
+	}
+	
+	
+	public void gameWon() {
+		
+      
+		if (Character1.getY() <= 20) {
+			
+			
+		
+			wonGameButton.setVisible(true);
+			
+			
+			
+			   intScore += 50;
+				
+				
+				scoreLabel.setText("Score :" + intScore);
+				
+				
+				
+				user_score.setVisible(true);
+				
+				user_name.setVisible(true);
+				
+				score_label.setVisible(true);
+				
+				name_label.setVisible(true);
+				
+				submitButton.setVisible(true);
+			
+			
+		}
+	}
+		
+		
+		
+		public void DB_function() {
+		
+		
+			
+		       
+		
+	}
 	
 }
