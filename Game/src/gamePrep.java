@@ -20,7 +20,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private character2[] Character2 = new character2[4];
 	
-	private character2[] Character2_secondRow = new character2[4];
+	private character2[] Character2_secondRow = new character2[4], Character2_thirdRow = new character2[4];
 	
 	private backgroundImage backgroundImage;
 	
@@ -61,7 +61,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 	
 	private JLabel[] character2Label = new JLabel[4], character2_secondRowLabel = new JLabel[4], logLabel = new JLabel[4], secondRowLabel = new JLabel[4];
 	
-	private JLabel[] thirdRowLabel = new JLabel[4];
+	private JLabel[] thirdRowLabel = new JLabel[4], character2_thirdRowLabel = new JLabel[4];
 	
 	
 	
@@ -397,6 +397,7 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			for (int i = 0; i < 4; i++) {
 				
+				Character2_thirdRow[i] = new character2();
 				Character2_secondRow[i] = new character2();
 				
 				if (i == 0) {
@@ -405,6 +406,10 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 					
 					Character2_secondRow[i].setX(0);
 					
+					Character2_thirdRow[i].setY(gameProperties.ghost3_Y);
+					
+					Character2_thirdRow[i].setX(0);
+					
 					
 				} else if (i == 1){
 					
@@ -412,17 +417,34 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 					
 					Character2_secondRow[i].setX(Character2_secondRow[0].getX() - 200);
 					
+					Character2_thirdRow[i].setY(Character2_thirdRow[0].getY());
+					
+					
+					Character2_thirdRow[i].setX(Character2_thirdRow[0].getX() - 200);
+					
 				} else if (i == 2) {
 					
                     Character2_secondRow[i].setY(Character2_secondRow[0].getY());
 					
 					Character2_secondRow[i].setX(Character2_secondRow[1].getX() - 200);
 					
+                  Character2_thirdRow[i].setY(Character2_thirdRow[0].getY());
+					
+					
+					Character2_thirdRow[i].setX(Character2_thirdRow[0].getX() - 200);
+					
+					
 				} else if (i == 3) {
 					
                      Character2_secondRow[i].setY(Character2_secondRow[0].getY());
 					
 					Character2_secondRow[i].setX(Character2_secondRow[2].getX() - 200);
+					
+                        Character2_thirdRow[i].setY(Character2_thirdRow[0].getY());
+					
+					
+					Character2_thirdRow[i].setX(Character2_thirdRow[0].getX() - 200);
+					
 				}
 				
 				
@@ -438,6 +460,21 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				Character2_secondRow[i].updateRectangleSize();
 				
 				Character2_secondRow[i].updateRectanglePosition();
+				
+				
+				// _____________________
+				
+             Character2_thirdRow[i].setHeight(Character2[0].getHeight());
+				
+				Character2_thirdRow[i].setWidth(Character2[0].getWidth());
+				
+				Character2_thirdRow[i].setImage(Character2[0].getImage());
+				
+				Character2_thirdRow[i].setCharacter1(Character1);
+				
+				Character2_thirdRow[i].updateRectangleSize();
+				
+				Character2_thirdRow[i].updateRectanglePosition();
 		
 				
 				
@@ -516,6 +553,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			
 			Character2_secondRow[i].setCharacter1Label(character1Label);
+			
+			Character2_thirdRow[i].setCharacter1Label(character1Label);
 			
 			Log[i].setCharacter1Label(character1Label);
 			
@@ -655,6 +694,20 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			Character2_secondRow[i].setCharacter2Label(character2_secondRowLabel[i]);
 			
 			
+			// ------------------------------------ 
+			
+			
+			
+			character2_thirdRowLabel[i] = new JLabel();
+			
+			character2_thirdRowLabel[i].setIcon(character2Image);
+			
+			character2_thirdRowLabel[i].setSize(Character2[0].getWidth(), Character2[0].getHeight());
+			
+			character2_thirdRowLabel[i].setLocation(Character2_thirdRow[0].getX(), Character2_thirdRow[0].getY());
+			
+			Character2_thirdRow[i].setCharacter2Label(character2_thirdRowLabel[i]);
+			
 			
 		}
 		
@@ -700,6 +753,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			Character2[i].setStartButton(startButton);
 			
 			Character2_secondRow[i].setStartButton(startButton);
+			
+			Character2_thirdRow[i].setStartButton(startButton);
 			
 			Log[i].setStartButton(startButton);
 			
@@ -749,6 +804,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			Character2[i].setRestartButton(wonGameButton);
 			
 			Character2_secondRow[i].setStartButton(wonGameButton);
+			
+			Character2_thirdRow[i].setStartButton(wonGameButton);
 		}
 		
 		
@@ -798,6 +855,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			add(character2_secondRowLabel[i]);
 			
+			add(character2_thirdRowLabel[i]);
+			
 			
 			 add(logLabel[i]);
 			
@@ -821,7 +880,6 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		
 	
-		
 		content.addKeyListener(this);
 		
 		content.setFocusable(true);
@@ -954,6 +1012,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				
 				Character2_secondRow[i].setIsMoving(false);
 				
+				Character2_thirdRow[i].setIsMoving(false);
+				
 				Log[i].setIsMoving(false);
 				
 				secondRowLog[i].setIsMoving(false);
@@ -967,6 +1027,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				Character2[i].startMoving();
 				
 				Character2_secondRow[i].startMoving();
+				
+				Character2_thirdRow[i].startMoving();
 				
 				Log[i].startMoving();
 				
@@ -990,6 +1052,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				
 				Character2_secondRow[i].setVisible(false);
 				
+				Character2_thirdRow[i].setVisible(false);
+				
 				Log[i].setVisible(false);
 				
 				secondRowLog[i].setVisible(false);
@@ -1000,6 +1064,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				character2Label[i].setVisible(Character2[i].getVisible());
 				
 				character2_secondRowLabel[i].setVisible(Character2_secondRow[i].getVisible());
+				
+				character2_thirdRowLabel[i].setVisible(Character2_secondRow[i].getVisible());
 				
 				logLabel[i].setVisible(Log[i].getVisible());
 				
@@ -1015,6 +1081,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				Character2[i].setVisible(true);
 				
 				Character2_secondRow[i].setVisible(true);
+
+				Character2_thirdRow[i].setVisible(true);
 				
 				Log[i].setVisible(true);
 				
@@ -1026,6 +1094,8 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 				character2Label[i].setVisible(Character2[i].getVisible());
 				
 				character2_secondRowLabel[i].setVisible(Character2_secondRow[i].getVisible());
+				
+				character2_thirdRowLabel[i].setVisible(Character2_thirdRow[i].getVisible());
 				
 				logLabel[i].setVisible(Log[i].getVisible());
 				
@@ -1049,6 +1119,26 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			
          						lostGame();
+         						
+         						for (int i = 0; i < 4; i++) {
+         							
+         						
+         						
+         						Character2[i].setIsMoving(false);
+         						
+         						Character2_secondRow[i].setIsMoving(false);
+         						
+         						Character2_thirdRow[i].setIsMoving(false);
+         						
+         						Log[i].setIsMoving(false);
+         						
+         						secondRowLog[i].setIsMoving(false);
+         						
+         						thirdRowLog[i].setIsMoving(false);
+         						
+         						wonGameButton.setVisible(false);
+         						
+         						}
        
 			
 			
@@ -1069,10 +1159,12 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 
 	            int Scory= Integer.parseInt(score);
 	            
-	            db.setScore(score);
+	            db.setScore(Scory);
 	            
 
 	            db.Insert();
+	            
+	            submitButton.setVisible(false);
 	            
 	                  
 
@@ -1103,8 +1195,6 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 		
 		character1Label.setLocation(Character1.getX(), Character1.getY());
 		
-	
-	
 		
 	}
 	
@@ -1120,11 +1210,10 @@ public class gamePrep extends JFrame implements KeyListener, ActionListener {
 			
 			
 			
-			   intScore += 50;
+			   intScore = 50;
 				
 				
 				scoreLabel.setText("Score :" + intScore);
-				
 				
 				
 				user_score.setVisible(true);

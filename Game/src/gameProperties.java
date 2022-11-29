@@ -19,7 +19,7 @@ public class gameProperties {
 	
 	public static final int ghost1_Y = 600;
 	
-	public static final int ghost3_Y = 0 ;
+	public static final int ghost3_Y = 250 ;
 	
 	public static final int ghost1_X = 0;
 	

@@ -209,9 +209,28 @@ public class character2 extends sprite implements Runnable {
 				 
 				 
 				 
+				 
+				 
 				 this.setX(rowX);
 				 
 			 }
+			 
+           if (this.getY() == gameProperties.ghost3_Y) {
+				 
+				 rowX += gameProperties.ghost2_step;
+				 
+				 
+				 if (rowX >= gameProperties.screen_width) {
+						rowX = -1 * this.width;
+					}
+				 
+				 
+				 
+				 this.setX(rowX);
+				 
+			 }
+			 
+			 
 			 
 			 
 			 
@@ -228,21 +247,26 @@ public class character2 extends sprite implements Runnable {
 			 
 			 // check collision
 			 
-			if (this.visible) this.detectCollision();
+			if (this.visible) {
+				
+				this.detectCollision();
+				
+				
+			}
 			 
 		
 				
-				
-				this.character2Label.setLocation(this.x, this.y);
+		this.character2Label.setLocation(this.x, this.y);
 				
 				
 	
-				
 				try {
 					
 					Thread.sleep(100);
 					
-					// sleep;
+					
+					
+					 
 					
 				} catch (Exception e) {
 					
@@ -269,14 +293,13 @@ public class character2 extends sprite implements Runnable {
 			
 
 			
-		//	System.out.println("BOOM");
+			System.out.println("BOOM");
+			
+			thread.stop();
 			
 		//	System.out.print(Character1.getRectangle());
 			
 			//System.out.print(this.getRectangle());
-			
-			this.isMoving = false;
-			
 			
 			
 			
